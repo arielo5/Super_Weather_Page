@@ -1,0 +1,12 @@
+.top-title {
+    text-align: center;
+}
+
+.block:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+.hero-body {
+    padding: 1rem 0.5rem;
+}
+
