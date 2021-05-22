@@ -6,7 +6,7 @@
 
 ## Usage
 
-    On the webpage you will see the current weather iunformation like date, temperature, wind speed, humidity and UV index on the top right side of the page and it will will change the information if you click any of the buttons with different citys on the left side, also you can input the name of the city on the top right section and it will laso display it. In adition to the current information it will also give you a 5 fau forecast of the current city with the temperature, wind speed and humidity.
+    On the webpage you will see the current weather iunformation like date, temperature, wind speed, humidity and UV index (for the uv index it will display a background color indicating whether the conditions are favorable, moderate, or severe) on the top right side of the page and it will will change the information if you click for a new city it will save the new city as a button on the left side and if you click any of the buttons of the past cities on the left side, it will display the information back again. In adition to the current information it will also give you a 5 day forecast of the current display city with the temperature, wind speed and humidity.
 
 ## Links & Screenshots
 

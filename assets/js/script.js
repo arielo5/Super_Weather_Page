@@ -57,17 +57,17 @@ function getApi(){
                 function uviColor() {
                   let color = data.current.uvi;
                   console.log(typeof color)
-                  if (color <= 2) {
+                  if (color < 2) {
                     currentUvEl.style.backgroundColor = "green"
-                  } else if (color > 2 && color <= 5) {
+                  } else if (color >= 2 && color < 5) {
                     currentUvEl.style.backgroundColor = "yellow"
-                  } else if (color > 5 && color <= 7) {
+                  } else if (color >= 5 && color < 7) {
                     currentUvEl.style.backgroundColor = "orange"
-                  } else if (color > 7 && color <= 10) {
+                  } else if (color >= 7 && color < 11) {
                     currentUvEl.style.backgroundColor = "Red"
-                  } else (color > 10) 
+                  } else if (color >= 11) {
                     currentUvEl.style.backgroundColor = "Violet"
-                  return;
+                  } return;
                 }; 
                 uviColor();
                 
