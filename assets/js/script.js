@@ -2,14 +2,7 @@
 let DateTime = luxon.DateTime;
 let searchBtnEl = document.getElementById("searchBtn");
 let minnBtnEl = document.getElementById("minnBtn");
-let chicBtnEl = document.getElementById("chicBtn");
-let newyBtnEl = document.getElementById("newyBtn");
-let orlaBtnEl = document.getElementById("orlaBtn");
-let sanfBtnEl = document.getElementById("sanfBtn");
-let seatBtnEl = document.getElementById("seatBtn");
-let denvBtnEl = document.getElementById("denvBtn");
-let atlaBtnEl = document.getElementById("atlaBtn");
-let austBtnEl = document.getElementById("austBtn");
+let locationName = document.getElementById("cCity");
 let nameCity;
 let currentCity;
 let currentDate;
@@ -17,6 +10,11 @@ let currentTemp;
 let currentWind;
 let currentHumi;
 let currentUv;
+let currentUvEl = document.getElementById("cUv");
+let btnSectionEl = document.getElementById("btnColum")
+let newBtn;
+let inputEl = document.getElementById("cityName");
+
 
 function getApi(){
 
@@ -32,7 +30,16 @@ function getApi(){
           let lonC = data.coord.lon;
           console.log(latC, lonC);
           currentDate = DateTime.fromSeconds(data.dt).toFormat('LL/dd/yyyy');
+          let iconCur = data.weather[0].icon;         
+          let iconCurUrl = "https://openweathermap.org/img/wn/"+iconCur+"@2x.png"
+          console.log(iconCurUrl);
           currentCity = "The Current Weather in "+data.name+" ("+currentDate+")";
+          document.getElementById("cCity").innerHTML = currentCity;
+          let newIcon = document.createElement("img");
+          newIcon.setAttribute("src", iconCurUrl);
+          newIcon.setAttribute("style", "width: 60px");
+          locationName.appendChild(newIcon);
+
                     
           let oneCallApiUrl = "https://api.openweathermap.org/data/2.5/onecall?lat="+latC+"&lon="+lonC+"&exclude=minutely,hourly,alerts&units=imperial&appid=2653796284e4c1372741d0410b9985ae";
 
@@ -46,14 +53,31 @@ function getApi(){
                 currentWind = "Wind: "+data.current.wind_speed+" MPH";
                 currentTemp = "Temp: "+data.current.temp+" °F";
                 currentHumi = "Humidity: "+data.current.humidity+" %";
-                currentUv = "UV Index: "+data.current.uvi;                
+                currentUv = "UV Index: "+data.current.uvi; 
+
+                function uviColor() {
+                  let color = data.current.uvi;
+                  console.log(typeof color)
+                  if (color <= 2) {
+                    currentUvEl.style.backgroundColor = "green"
+                  } else if (color > 2 && color <= 5) {
+                    currentUvEl.style.backgroundColor = "yellow"
+                  } else if (color > 5 && color <= 7) {
+                    currentUvEl.style.backgroundColor = "orange"
+                  } else if (color > 7 && color <= 10) {
+                    currentUvEl.style.backgroundColor = "Red"
+                  } else (color > 10) 
+                    currentUvEl.style.backgroundColor = "Violet"
+                  return;
+                }; 
+                uviColor();
+                
                 console.log(currentCity);
                 console.log(currentDate);
                 console.log(currentTemp);
                 console.log(currentWind);
                 console.log(currentHumi);
-                console.log(currentUv); 
-                document.getElementById("cCity").innerHTML = currentCity;
+                console.log(currentUv);                 
                 document.getElementById("cTemp").innerHTML = currentTemp;
                 document.getElementById("cWind").innerHTML = currentWind;
                 document.getElementById("cHumi").innerHTML = currentHumi;
@@ -112,56 +136,24 @@ function minnCity(){
     getApi();
 }
 
-function chicCity(){
-  nameCity = "Chicago";
-  console.log(nameCity)
-  getApi();
-}
-
-function newyCity(){
-  nameCity = "New York";
-  console.log(nameCity);
-  getApi();
-}
-
-function orlaCity(){
-  nameCity = "Orlando";
-  console.log(nameCity)
-  getApi();
-}
-
-function sanfCity(){
-  nameCity = "San Francisco";
-  console.log(nameCity);
-  getApi();
-}
-
-function seatCity(){
-  nameCity = "Seattle";
-  console.log(nameCity);
-  getApi();
-}
-
-function denvCity(){
-  nameCity = "Denver";
-  console.log(nameCity);
-  getApi();
-}
-
-function atlaCity(){
-  nameCity = "Atlanta";
-  console.log(nameCity);
-  getApi();
-}
-
-function austCity(){
-  nameCity = "Austin";
-  console.log(nameCity);
-  getApi();
-}
-
 function inputCity(){
   nameCity = document.getElementById("cityName").value;
+  console.log(nameCity);
+  getApi();
+}
+
+function saveHistory(){
+  
+  newBtn = document.createElement("button");
+  newBtn.setAttribute("class", "button is-medium is-fullwidth is-link mt-2");
+  newBtn.textContent = document.getElementById("cityName").value
+  newBtn.value = document.getElementById("cityName").value;
+  btnSectionEl.appendChild(newBtn);
+  
+}
+
+function savedCity(){
+  nameCity = newBtn.value;
   console.log(nameCity);
   getApi();
 }
@@ -169,12 +161,6 @@ function inputCity(){
 minnCity()
 
 minnBtnEl.addEventListener('click', minnCity);
-chicBtnEl.addEventListener('click', chicCity);
-newyBtnEl.addEventListener('click', newyCity);
-orlaBtnEl.addEventListener('click', orlaCity);
-sanfBtnEl.addEventListener('click', sanfCity);
-seatBtnEl.addEventListener('click', seatCity);
-denvBtnEl.addEventListener('click', denvCity);
-atlaBtnEl.addEventListener('click', atlaCity);
-austBtnEl.addEventListener('click', austCity);
 searchBtnEl.addEventListener('click', inputCity);
+searchBtnEl.addEventListener('click', saveHistory);
+btnSectionEl.addEventListener("click", savedCity);
