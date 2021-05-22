@@ -10,3 +10,7 @@
     padding: 1rem 0.5rem;
 }
 
+.forecast-card {
+    background-color: rgb(68, 211, 255);
+    color: white;
+}
