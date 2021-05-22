@@ -1,4 +1,3 @@
-// let cityNameEl = document.getElementById("cityName").value;
 let DateTime = luxon.DateTime;
 let searchBtnEl = document.getElementById("searchBtn");
 let minnBtnEl = document.getElementById("minnBtn");
